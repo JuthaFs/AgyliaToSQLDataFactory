@@ -1,0 +1,9 @@
+{
+	"name": "AgyliaToSQLDataFactory",
+	"location": "southeastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "7aa8652d-2e38-4865-9054-8c52457d1e97",
+		"tenantId": "b40e4d77-d98d-440f-8b43-9b57d978391b"
+	}
+}

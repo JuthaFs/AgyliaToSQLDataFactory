@@ -1,0 +1,10 @@
+{
+	"name": "AzureSqlMI329",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/dbe24ede-0b58-48e0-94cc-4f962c07661d/resourceGroups/bbsharing/providers/Microsoft.Sql/managedInstances/bbsqlinstance",
+		"groupId": "managedInstance",
+		"fqdns": [
+			"bbsqlinstance.3c2484c05c67.database.windows.net"
+		]
+	}
+}
