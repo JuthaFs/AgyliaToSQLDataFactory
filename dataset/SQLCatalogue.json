@@ -1,0 +1,87 @@
+{
+	"name": "SQLCatalogue",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlMI1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlMITable",
+		"schema": [
+			{
+				"name": "InternalReference",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ExternalReferance",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Description",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContentType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DisplayType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CreateOn",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Priority",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EnrolmentMode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EnrolmentCount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CPDLearningHours",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CPDPoints",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AccessCount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RatingMean",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RatingCount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UpdateDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "FromFile",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CatalogueAgylia"
+		}
+	}
+}
