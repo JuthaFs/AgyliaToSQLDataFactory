@@ -292,7 +292,7 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false,",
+				"     ignoreNoFilesFound: true,",
 				"     multiLineRow: true) ~> CSVNewData",
 				"CSVNewData select(mapColumn(",
 				"          each(match(name=='Internal reference'||name=='External reference'||name=='Name'||name=='Description'||name=='Content Type'||name=='Display type'||name=='Created on'||name=='Priority'||name=='Created on'||name=='Priority'||name=='Enrolment mode'||name=='Enrolment count'||name=='CPD learning hours'||name=='CPD points'||name=='Access count'||name=='Rating mean'||name=='Rating count'))",
