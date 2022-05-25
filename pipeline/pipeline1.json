@@ -17,13 +17,7 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "DirCatalogue",
-						"type": "DatasetReference",
-						"parameters": {
-							"DelimiterSymbol": {
-								"value": ",",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
@@ -92,7 +86,7 @@
 									"coreCount": 8,
 									"computeType": "General"
 								},
-								"traceLevel": "Fine"
+								"traceLevel": "Coarse"
 							}
 						}
 					]

@@ -13,7 +13,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "DirCatalogue",
+						"referenceName": "CSVCatalogue",
 						"type": "DatasetReference"
 					},
 					"name": "CSVNewData"
