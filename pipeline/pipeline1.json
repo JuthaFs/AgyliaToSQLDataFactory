@@ -30,6 +30,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -72,6 +73,12 @@
 								"dataflow": {
 									"referenceName": "CSVToSQLCatalogue",
 									"type": "DataFlowReference",
+									"parameters": {
+										"filename": {
+											"value": "'@{item().name}'",
+											"type": "Expression"
+										}
+									},
 									"datasetParameters": {
 										"CSVNewData": {
 											"name": {

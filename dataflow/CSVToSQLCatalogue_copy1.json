@@ -1,5 +1,5 @@
 {
-	"name": "CSVToSQLCatalogue",
+	"name": "CSVToSQLCatalogue_copy1",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -52,12 +52,12 @@
 				},
 				{
 					"name": "AlterRow1"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
-				"parameters{",
-				"     filename as string",
-				"}",
 				"source(output(",
 				"          InternalReference as string,",
 				"          ExternalReferance as string,",
@@ -296,9 +296,11 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     multiLineRow: true) ~> CSVNewData",
+				"     rowUrlColumn: 'SourceFileName',",
+				"     multiLineRow: true,",
+				"     wildcardPaths:['CatalogueExport*']) ~> CSVNewData",
 				"CSVNewData select(mapColumn(",
-				"          each(match(name=='Internal reference'||name=='External reference'||name=='Name'||name=='Description'||name=='Content Type'||name=='Display type'||name=='Created on'||name=='Priority'||name=='Created on'||name=='Priority'||name=='Enrolment mode'||name=='Enrolment count'||name=='CPD learning hours'||name=='CPD points'||name=='Access count'||name=='Rating mean'||name=='Rating count'))",
+				"          each(match(name=='Internal reference'||name=='External reference'||name=='Name'||name=='Description'||name=='Content Type'||name=='Display type'||name=='Created on'||name=='Priority'||name=='Created on'||name=='Priority'||name=='Enrolment mode'||name=='Enrolment count'||name=='CPD learning hours'||name=='CPD points'||name=='Access count'||name=='Rating mean'||name=='Rating count'||name=='SourceFileName'))",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectSomeColumn2",
@@ -322,14 +324,18 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectSomeColumn1",
 				"SelectSomeColumn2 filter(!isNull({External reference})) ~> FilterExternalRefIsNull",
-				"SelectSomeColumn1 derive(SignatureOld = sha1(256,columns())) ~> AddNewSignatureKey",
-				"FilterExternalRefIsNull derive(SignatureNew = sha1(256,columns())) ~> AddOldSignatureKey",
+				"SelectSomeColumn1 derive(SignatureOld = sha1(256,InternalReference,ExternalReferance,Name,Description,ContentType,DisplayType,CreateOn,Priority\r",
+				",EnrolmentMode,EnrolmentCount,CPDLearningHours,CPDPoints,AccessCount,RatingMean,RatingCount)) ~> AddNewSignatureKey",
+				"FilterExternalRefIsNull derive(SignatureNew = sha1(256,{Internal reference},{External reference},Name,Description,{Content Type}\r",
+				",{Display type},{Created on},Priority,{Enrolment mode},{Enrolment count},{CPD learning hours},{CPD points},{Access count},{Rating mean},{Rating count})) ~> AddOldSignatureKey",
 				"AddOldSignatureKey, AddNewSignatureKey exists(SignatureNew == SignatureOld,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> SelectDoesNotExist",
-				"SelectDoesNotExist derive(UpdateDate = currentUTC(),",
+				"aggregate1 derive(UpdateDate = currentUTC(),",
 				"          FromFile = $filename) ~> AddUpdataDateFromFile",
-				"AddUpdataDateFromFile alterRow(upsertIf(!isNull({External reference}))) ~> AlterRow1",
+				"AddUpdataDateFromFile alterRow(upsertIf(!isNull(aggregate1@{External reference}))) ~> AlterRow1",
+				"SelectDoesNotExist aggregate(groupBy({External reference}),",
+				"     each(match(name != \"External reference\"), $$ = first($$))) ~> aggregate1",
 				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
