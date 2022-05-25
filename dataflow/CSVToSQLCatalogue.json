@@ -55,6 +55,9 @@
 				}
 			],
 			"scriptLines": [
+				"parameters{",
+				"     filename as string",
+				"}",
 				"source(output(",
 				"          InternalReference as string,",
 				"          ExternalReferance as string,",
@@ -293,7 +296,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: true,",
-				"     multiLineRow: true) ~> CSVNewData",
+				"     multiLineRow: true,",
+				"     wildcardPaths:['CatalogueExport*']) ~> CSVNewData",
 				"CSVNewData select(mapColumn(",
 				"          each(match(name=='Internal reference'||name=='External reference'||name=='Name'||name=='Description'||name=='Content Type'||name=='Display type'||name=='Created on'||name=='Priority'||name=='Created on'||name=='Priority'||name=='Enrolment mode'||name=='Enrolment count'||name=='CPD learning hours'||name=='CPD points'||name=='Access count'||name=='Rating mean'||name=='Rating count'))",
 				"     ),",
@@ -325,7 +329,7 @@
 				"     negate:true,",
 				"     broadcast: 'auto')~> SelectDoesNotExist",
 				"SelectDoesNotExist derive(UpdateDate = currentUTC(),",
-				"          FromFile = 'Filename') ~> AddUpdataDateFromFile",
+				"          FromFile = $filename) ~> AddUpdataDateFromFile",
 				"AddUpdataDateFromFile alterRow(upsertIf(!isNull({External reference}))) ~> AlterRow1",
 				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
