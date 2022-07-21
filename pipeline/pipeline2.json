@@ -19,11 +19,9 @@
 						"referenceName": "CSVToSQLCatalogue",
 						"type": "DataFlowReference",
 						"parameters": {
-							"filename": "'CatalogueExport_CUT10 (1).csv'"
-						},
-						"datasetParameters": {
-							"CSVNewData": {
-								"name": "CatalogueExport_CUT10 (1).csv"
+							"filename": {
+								"value": "'@{pipeline().parameters.filename}'",
+								"type": "Expression"
 							}
 						}
 					},
@@ -35,6 +33,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }

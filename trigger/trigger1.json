@@ -1,0 +1,27 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline2",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"filename": "@triggerBody().filename"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/main/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/2f6fca5b-8ab6-4219-be3f-35f1ea393de9/resourceGroups/IrisSCGResourceGroup/providers/Microsoft.Storage/storageAccounts/agyliastorageaccount",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
