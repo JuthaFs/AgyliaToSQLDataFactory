@@ -296,6 +296,7 @@
 				"     allowSchemaDrift: false,",
 				"     validateSchema: true,",
 				"     ignoreNoFilesFound: false,",
+				"     moveFiles: [($filename),('Temp_Catalogue/'+$filename)],",
 				"     rowUrlColumn: 'File',",
 				"     multiLineRow: true,",
 				"     wildcardPaths:[($filename)]) ~> CSVNewData",
