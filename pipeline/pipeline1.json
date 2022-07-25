@@ -52,7 +52,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Data flow2",
+							"name": "Data flow1",
 							"type": "ExecuteDataFlow",
 							"dependsOn": [],
 							"policy": {
@@ -69,7 +69,7 @@
 									"type": "DataFlowReference",
 									"parameters": {
 										"filename": {
-											"value": "'@{item().name}'",
+											"value": "'@{item()}'",
 											"type": "Expression"
 										}
 									},
@@ -86,7 +86,7 @@
 									"coreCount": 8,
 									"computeType": "General"
 								},
-								"traceLevel": "Coarse"
+								"traceLevel": "Fine"
 							}
 						}
 					]
