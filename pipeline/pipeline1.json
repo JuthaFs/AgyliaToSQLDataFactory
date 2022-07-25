@@ -52,41 +52,55 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Data flow1",
-							"type": "ExecuteDataFlow",
+							"name": "If Condition1",
+							"type": "IfCondition",
 							"dependsOn": [],
-							"policy": {
-								"timeout": "1.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
 							"userProperties": [],
 							"typeProperties": {
-								"dataflow": {
-									"referenceName": "CSVToSQLCatalogue",
-									"type": "DataFlowReference",
-									"parameters": {
-										"filename": {
-											"value": "'@{item().name}'",
-											"type": "Expression"
-										}
-									},
-									"datasetParameters": {
-										"CSVNewData": {
-											"name": {
-												"value": "@item().name",
-												"type": "Expression"
-											}
+								"expression": {
+									"value": "@not(equals(item().type,'Folder'))",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Data flow1_copy1",
+										"type": "ExecuteDataFlow",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "1.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"dataflow": {
+												"referenceName": "CSVToSQLCatalogue",
+												"type": "DataFlowReference",
+												"parameters": {
+													"filename": {
+														"value": "'@{item().name}'",
+														"type": "Expression"
+													}
+												},
+												"datasetParameters": {
+													"CSVNewData": {
+														"name": {
+															"value": "@item().name",
+															"type": "Expression"
+														}
+													}
+												}
+											},
+											"compute": {
+												"coreCount": 8,
+												"computeType": "General"
+											},
+											"traceLevel": "Fine"
 										}
 									}
-								},
-								"compute": {
-									"coreCount": 8,
-									"computeType": "General"
-								},
-								"traceLevel": "Fine"
+								]
 							}
 						}
 					]
