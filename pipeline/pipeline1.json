@@ -76,7 +76,7 @@
 									"datasetParameters": {
 										"CSVNewData": {
 											"name": {
-												"value": "@item()",
+												"value": "@item().name",
 												"type": "Expression"
 											}
 										}
