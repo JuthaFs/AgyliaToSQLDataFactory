@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "Catalogue_AgyliaToCap",
 	"properties": {
 		"activities": [
 			{
@@ -21,7 +21,7 @@
 					},
 					"fieldList": [
 						"childItems",
-						"lastModified"
+						"childItems"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
